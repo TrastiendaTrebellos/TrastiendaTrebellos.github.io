@@ -1,0 +1,111 @@
+<html>
+
+<h1>Trastienda Trebellos<h1>
+
+<h2>Listado productos</h2>
+		<table>
+            <thead>
+                <th>Descripción</th>
+                <th>Comprar</th>
+                <th>Precio</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Ordenador portátil modelo Linux</th>
+                    <th>
+                        <button onclick="añadir_a_carrito_textarea('Ord. Por. Linux 24€.')">Añadir a carrito</button>
+                    </th>
+                    <th>24€</th>
+                </tr>
+                <tr>
+                    <th>Cargador para Ord. Por. Linux</th>
+                    <th>
+                        <button
+                        onclick="añadir_a_carrito_textarea('Cargador Ord. Por. Lin. 0,50€.')">Añadir a carrito</button>
+                    </th>
+                    <th>0,50€</th>
+                </tr>
+                <tr>
+                    <th>Manzanas do Val do Ulla</th>
+                    <th>
+                        <button onclick="añadir_a_carrito_textarea('Manzanas Val. Ull. 0,80€.')">Añadir a carrito</button>
+                    </th>
+                    <th>0,80€</th>
+                    <tr>
+                    <th>Catálogo de Trastienda Trebellos</th>
+                    <th>
+                        <button onclick="añadir_a_carrito_textarea('Catalogo 0,12€.')">Añadir a carrito</button>
+                    </th>
+                    <th>0,12€<th>
+                </tr>
+                </tr>
+            </tbody>
+        </table>
+        
+		<h2>Carrito de la compra</h2>
+		<form action="javascript:enviar_formulario();"
+    method="post" name="Prueba envío por email">
+    
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre"><br>
+            
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido"><br>
+            
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion"><br>
+
+            <label for="localidad">Localidad:</label>
+            <input type="text" id="localidad" name="localidad"><br>
+
+            <label for="provincia">Provincia:</label>
+            <input type="text" id="provincia" name="provincia"><br>
+            
+            <label for="código_postal">Código postal:</label>
+            <input type="text" id="código_postal" name="código_postal"><br>
+            
+            <label for="carrito">Producto solicitado:</label>
+            <input type="textarea" id="producto solicitado" name="producto solicitado"><br>
+
+            <input id="submit_form" type="submit" value="Enviar pedido" />    
+        </form>
+        
+        <script>
+            function añadir_a_carrito( producto ){
+				var elemento = document.getElementById("producto solicitado");
+				var html_nuevo = producto + "<br>";
+				elemento.insertAdjacentHTML('beforeend', html_nuevo);
+			}
+            function añadir_a_carrito_textarea( producto ){
+				var elemento = document.getElementById("producto solicitado");
+                var valor_actual = elemento.value;
+				var valor_nuevo = valor_actual + "\n" + producto;
+				elemento.value = valor_nuevo ;
+			}
+			function enviar_formulario () {
+				var nombre = document.getElementById("nombre").value;
+				var apellido = document.getElementById("apellido").value;
+				var direccion = document.getElementById("direccion").value;
+				var localidad = document.getElementById("localidad").value;
+				var provincia = document.getElementById("provincia").value;
+				var código_postal = document.getElementById("código_postal").value;
+				var producto_solicitado
+				= document.getElementById("producto solicitado").value;
+				
+				var cuerpo = nombre +'---' 
+                    + apellido +'---' 
+                    + direccion +'---' 
+                    + localidad+'---' 
+                    + provincia +'---'
+                    + código_postal +'---'
+                    + producto_solicitado;
+                    
+                var email = 'mailto:trastiendatrebellos@gmail.com?subject=Pedido&body='+cuerpo;
+                
+                console.log('Email: '+email);
+				
+				window.open( email );
+			}
+		</script>
+	</body>
+</html>
